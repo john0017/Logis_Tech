@@ -134,12 +134,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script src="https://cdn.socket.io/4.2.0/socket.io.min.js" integrity="sha384-PiBR5S00EtOj2Lto9Uu81cmoyZqR57XcOna1oAuVuIEjzj0wpqDVfD0JA9eXlRsj" crossorigin="anonymous"></script>
-    <script src="static/quagga.js"></script>
     <script>
         $(document).ready(function(){
 
                 
-
                 let video = document.querySelector("#videoElement");
                 let canvas = document.querySelector("#canvasElement");
                 let ctx = canvas.getContext('2d');
@@ -168,7 +166,6 @@
                 $('#scanbtn').on('click', function(){
                     console.log('scan start')
 
-                    
                     $('#scanOnClick').removeClass('d-none')
                     $('#scanBtnContainer').addClass('d-none')
 
