@@ -2,7 +2,7 @@ from flask import Flask, render_template, url_for, request, abort, redirect, ses
 from flask_bootstrap import Bootstrap
 from functools import wraps
 from datetime import timedelta, date, datetime
-from pyzbar.pyzbar import decode
+# from pyzbar.pyzbar import decode
 from flask_socketio import SocketIO, emit, disconnect
 from PIL import Image
 from io import BytesIO
