@@ -1,11 +1,7 @@
 from flask import Flask, render_template, url_for, request, abort, redirect, session, flash, send_file, make_response, jsonify, Response
 from flask_bootstrap import Bootstrap
-import pandas as pd
-import mysql.connector
-import uuid
 from functools import wraps
 from datetime import timedelta, date, datetime
-import cv2
 from pyzbar.pyzbar import decode
 from flask_socketio import SocketIO, emit, disconnect
 from PIL import Image
