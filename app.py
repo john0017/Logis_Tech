@@ -37,4 +37,5 @@ def test_connect(data):
     disconnect(request.sid)
 
 
-socketio.run(app)
+if __name__ == '__main__':
+    app.run(debug='True')
