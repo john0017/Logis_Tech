@@ -1,1 +1,3 @@
 libzbar-dev
+https://github.com/heroku/heroku-buildpack-apt.git
+heroku/python
