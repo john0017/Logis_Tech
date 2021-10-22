@@ -18,13 +18,13 @@ def vid():
     return render_template("scanner.html",
                         )
 
-# @socketio.on('connect')
-# def connect():
-#     print("client connected")
+@socketio.on('connect')
+def connect():
+    print("client connected")
 
-# @socketio.on('message')
-# def message(msg):
-#     print("\n\nmessage: ", msg['data'])
+@socketio.on('message')
+def message(msg):
+    print("\n\nmessage: ", msg['data'])
 
 # @socketio.on('process')
 # def test_connect(data):
