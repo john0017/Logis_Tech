@@ -12,7 +12,7 @@ import sys
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 Bootstrap(app)
-socketio = SocketIO(app)
+socketio = SocketIO(app, , logger=True, engineio_logger=True)
 
 @app.route('/', methods=['GET', 'POST'])
 def vid():
