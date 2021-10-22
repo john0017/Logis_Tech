@@ -163,6 +163,7 @@
                                         0, 0, 400, 500);
                 
                     let dataURL = canvas.toDataURL('image/jpg');
+                    socket.emit('process', dataURL);
                     
                 }
 
@@ -191,7 +192,13 @@
                     }).catch(function(error) {
                         console.log(error);
                 });
-            })
+                    
+                socket.on('disconnect', function() {
+
+                    console.log('Disconnected!');
+                    localMediaStream = null;
+
+                })
         
         });
    
