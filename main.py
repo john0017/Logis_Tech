@@ -42,7 +42,7 @@ def test_connect(data):
     
     if len(decode_frame) > 0:
         # print(decode_frame)
-        emit('bar found', '\n\nCAUGHT')
+        emit('bar found', str(decode_frame[0][0]) )
         disconnect(request.sid)
 
 
