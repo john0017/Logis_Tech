@@ -7,11 +7,12 @@ from flask_socketio import SocketIO, emit, disconnect
 from PIL import Image
 from io import BytesIO
 import base64
+import sys
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 Bootstrap(app)
-socketio = SocketIO(app, logger=True, engineio_logger=True)
+socketio = SocketIO(app)
 
 @app.route('/', methods=['GET', 'POST'])
 def vid():
@@ -21,10 +22,12 @@ def vid():
 @socketio.on('connect')
 def connect():
     print("client connected")
+    sys.stdout.flush()
 
 @socketio.on('message')
 def message(msg):
-    print("\n\nmessage: ", msg)
+    print("Incoming Message: ", msg)
+    sys.stdout.flush()
 
 # @socketio.on('process')
 # def test_connect(data):
