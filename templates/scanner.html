@@ -144,7 +144,10 @@
                         socket.emit('message', 'Im connected!');
 
                 });
-
+            
+                socket.on('test echo', (msg) => {
+                    console.log('msg', msg)
+                });
                 
                 let video = document.querySelector("#videoElement");
                 let canvas = document.querySelector("#canvasElement");
