@@ -137,7 +137,7 @@
     <script>
         $(document).ready(function(){
             
-                let socket = io('https://logis-tech.herokuapp.com/');
+                let socket = io();
 
                     socket.on('connect', function() {
                         console.log('connected!!!')
