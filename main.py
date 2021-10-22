@@ -32,12 +32,13 @@ def message(msg):
 
 @socketio.on('process')
 def test_connect(data):
-    emit('test echo', data)
+#     emit('test echo', data)
     data = data.split(",")[1]
     img = Image.open(BytesIO(base64.b64decode(data)))
     emit('test echo', '\n\nProcessing')
     
     decode_frame = decode(img)
+    emit('bar found', decode_frame )
     
     if len(decode_frame) > 0:
         # print(decode_frame)
