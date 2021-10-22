@@ -24,7 +24,7 @@ def connect():
 
 @socketio.on('message')
 def message(msg):
-    print("\n\nmessage: ", msg['data'])
+    print("\n\nmessage: ", msg)
 
 # @socketio.on('process')
 # def test_connect(data):
