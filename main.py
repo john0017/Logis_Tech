@@ -39,7 +39,7 @@ def test_connect(data):
     
     decode_frame = decode(img)
     
-    if len(decode_frame) == 1:
+    if len(decode_frame) > 0:
         # print(decode_frame)
         emit('test echo', decode_frame )
         disconnect(request.sid)
