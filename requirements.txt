@@ -11,3 +11,5 @@ pyzbar==0.1.8
 tox
 twine
 wheel
+gevent-websocket
+eventlet
