@@ -42,7 +42,7 @@ def test_connect(data):
     
     if len(decode_frame) > 0:
         # print(decode_frame)
-        emit('bar found', str(decode_frame[0][0]) )
+        emit('bar found', decode_frame[0][0].decode('utf-8') )
         disconnect(request.sid)
 
 
