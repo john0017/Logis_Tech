@@ -148,6 +148,10 @@
                 socket.on('test echo', (msg) => {
                     console.log('msg', msg)
                 });
+            
+                socket.on('bar found', (msg) => {
+                    console.log('BAR FOUND', msg)
+                });
                 
                 let video = document.querySelector("#videoElement");
                 let canvas = document.querySelector("#canvasElement");
