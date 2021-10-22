@@ -26,7 +26,7 @@ def connect():
 
 @socketio.on('message')
 def message(msg):
-    emit.('test echo', '\n\n SERVER TO CLIENT')
+    emit('test echo', '\n\n SERVER TO CLIENT')
     print("Incoming Message: ", msg)
     sys.stdout.flush()
 
