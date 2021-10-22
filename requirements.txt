@@ -8,3 +8,6 @@ websockets==8.1
 websocket-client==1.2.1
 Flask-SocketIO==5.1.1
 pyzbar==0.1.8
+tox
+twine
+wheel
