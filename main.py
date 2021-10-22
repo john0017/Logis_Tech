@@ -30,11 +30,19 @@ def message(msg):
     print("Incoming Message: ", msg)
     sys.stdout.flush()
 
-# @socketio.on('process')
-# def test_connect(data):
-#     print(data)
-#     emit('test echo', 'echoed')
-#     disconnect(request.sid)
+@socketio.on('process')
+def test_connect(data):
+    
+    data = data.split(",")[1]
+    img = Image.open(BytesIO(base64.b64decode(data)))
+    emit('test echo', '\n\nProcessing')
+    
+    decode_frame = decode(img)
+    
+    if len(decode_frame) == 1:
+        # print(decode_frame)
+        emit('test echo', decode_frame )
+        disconnect(request.sid)
 
 
 if __name__ == '__main__':
