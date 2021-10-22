@@ -32,7 +32,7 @@ def message(msg):
 
 @socketio.on('process')
 def test_connect(data):
-    
+    emit('test echo', data)
     data = data.split(",")[1]
     img = Image.open(BytesIO(base64.b64decode(data)))
     emit('test echo', '\n\nProcessing')
@@ -41,7 +41,7 @@ def test_connect(data):
     
     if len(decode_frame) > 0:
         # print(decode_frame)
-        emit('test echo', decode_frame )
+        emit('bar found', decode_frame )
         disconnect(request.sid)
 
 
