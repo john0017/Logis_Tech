@@ -38,11 +38,11 @@ def test_connect(data):
     emit('test echo', '\n\nProcessing')
     
     decode_frame = decode(img)
-    emit('bar found', decode_frame )
+#     emit('bar found', decode_frame )
     
     if len(decode_frame) > 0:
         # print(decode_frame)
-        emit('bar found', decode_frame )
+        emit('bar found', '\n\nCAUGHT')
         disconnect(request.sid)
 
 
