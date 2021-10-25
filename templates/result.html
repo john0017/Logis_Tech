@@ -12,9 +12,143 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+<style>
+    body{
+        background-color: #73568f23;
+    }
+    .dropdown-divider{
+        color: #73568fd0;
+    }
+    .addBtn{
+        color: #f1eef3;
+        background-color:#73568fd0;
+        font-weight: bold;
+    }
+    .closeBtn{
+        color: red;
+        font-weight: bold;
+    }
+    .inboundBtn{
+        color: #73568fd0;
+        background-color: #f1eef3;
+        font-weight: bold;
+    }
+    .outboundBtn{
+        color: #f1eef3;
+        background-color:#73568fd0;
+        font-weight: bold;
+    }
+    .headers{
+        font-style: italic;
+        font-weight: bolder;
+    }
+    .section-1{
+        border-radius: 25px;
+        box-shadow: 4px 4px 4px #73568f65;
+        border-color: #73568fd0;
+    }
+</style>
 </head>
 <body>
-    {{ data }}
+    <!-- floating menu Btn -->
+    <a class="btn border border-secondary mt-1 ms-1 border-0" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample"
+        style="border-color: #73568fd0; color:#73568fd0">
+        <i class="fas fa-bars"></i>
+    </a>
+      
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body p-0 py-3">
+
+            <div class="list-group border-0 p-0">
+                <a href="{{ url_for('home') }}" class="list-group-item list-group-item-action border-0">
+                    <i class="fas fa-barcode"></i>&nbsp;&nbsp; Scan
+                </a>
+                <a href="#" class="list-group-item list-group-item-action border-0">
+                    <i class="fas fa-search"></i>&nbsp;&nbsp; Search
+                </a>
+                <a href="#" class="list-group-item list-group-item-action border-0">
+                    <i class="fas fa-warehouse"></i>&nbsp;&nbsp; All Products
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- main content -->
+    <div class="container p-3" style="text-transform: capitalize;">
+        
+        {% if key in data.keys() %}
+            <div class="row p-2 my-3">
+                <div class="col">
+                    <div class="rounded-pill shadow-sm text-center border inboundBtn">
+                        inbound
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="rounded-pill shadow-sm text-center border outboundBtn">
+                        outbound
+                    </div>
+                </div>
+            </div>
+            <hr class="dropdown-divider">
+            
+            <div class="headers m-3">Product details</div>
+
+            <div class="p-2 my-2 section-1 border" style="font-weight:300;">
+                <div class="row p-2">
+                    <div class="col">
+                        Barcode No.
+                    </div>
+                    <div class="col">
+                        {{ key }}
+                    </div>
+                </div>
+                {% for key, val in data[key].items() %}
+                    <div class="row p-2">
+                        <div class="col">
+                            {{ key| replace("_", " ") }}
+                        </div>
+                        <div class="col">
+                            {{ val }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="headers mt-4 m-3">Product history</div>
+            
+            <div class="p-2 mt-2 section-1 border" style="font-weight:300;">
+                <div class="row p-2">
+                    <span style="font-style: italic;">Not available</span>
+                </div>
+            </div>
+
+        {% else %}
+            <div class="row p-2 fw-bold text-center mt-3">
+                <span>product not found</span>
+                <hr class="dropdown-divider">
+            </div>
+            <div class="row p-2 mt-3">
+                <div class="col">
+                    <div class="rounded-pill shadow-sm text-center border addBtn">
+                        add to catalogue
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+    </div>
+
+    <!-- custom scripts -->
+    <script>
+        let screenHeight = $(window).height();
+        let screenWidth = $(window).width()
+
+        console.log(screenHeight, screenWidth)
+    </script>
 </body>
 </html>                            
