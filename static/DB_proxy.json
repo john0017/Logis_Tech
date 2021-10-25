@@ -1,0 +1,14 @@
+{
+    "505637950656": {
+        "name": "hand gel",
+        "brand": "myprotein",
+        "quantity_available": 1,
+        "price_per_unit": 30
+    },
+    "8717163972717": {
+        "name": "cream",
+        "brand": "dove",
+        "quantity_available": 3,
+        "price_per_unit": 15
+    }
+}
