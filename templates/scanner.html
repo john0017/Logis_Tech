@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +18,9 @@
         width: 100%;
         height: 100%;
     }
+    body{
+        background-color: #73568f23;
+    }
     .scanBtnDiv{
         margin-top: 50%;
     }
@@ -32,14 +36,16 @@
     .scanBtnCaption{
         font-style: italic;
         color: black;
+        font-weight:300;
     }
     .canvasDiv{
         height: 100vh;
         
     }
     .scanClose{
-        border-color: #73568fd0;
+        border-color: black;
         font-size: x-large;
+        background-color: #f1eef3;
         
     }
     .scanClose:hover{
@@ -81,32 +87,29 @@
       
 </style>
 </head>
-<body style="background-color: #f1eef3;">
+<body>
 
-    <a class="btn border border-secondary mt-1 ms-1" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+    <a id="menuBtn" class="btn border border-secondary mt-1 ms-1 border-0" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"        aria-controls="offcanvasExample" style="border-color: #73568fd0; color:#73568fd0">
         <i class="fas fa-bars"></i>
     </a>
       
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-
-        <div class="list-group border-0">
-            <a href="#" class="list-group-item list-group-item-action disabled border-0">
-                <i class="fas fa-plus"></i> Add Item
-            </a>
-            <a href="#" class="list-group-item list-group-item-action border-0">
-                <i class="fas fa-search"></i> Search
-            </a>
-            <a href="#" class="list-group-item list-group-item-action border-0">A third link item</a>
-            <a href="#" class="list-group-item list-group-item-action border-0">A fourth link item</a>
-            <a href="#" class="list-group-item list-group-item-action border-0">A disabled link item</a>
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
+        <div class="offcanvas-body p-0 py-3">
 
-    </div>
+            <div class="list-group border-0 p-0">
+                <a href="#" class="list-group-item list-group-item-action border-0">
+                    <i class="fas fa-search"></i>&nbsp;&nbsp; Search
+                </a>
+                <a href="#" class="list-group-item list-group-item-action border-0">
+                    <i class="fas fa-warehouse"></i>&nbsp;&nbsp; All Products
+                </a>
+            </div>
+
+        </div>
     </div>
 
     <div class="container" id="canvas-container">
@@ -115,7 +118,7 @@
             <div class="canvasDiv mt-3">
                 <canvas class="" id="canvasElement" width=auto height=500px></canvas>
                 <div class="mt-3">
-                    <button type="button" class="btn shadow-lg rounded-pill scanClose">
+                    <button type="button" id="scanExit" class="btn shadow-lg rounded-pill scanClose">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
@@ -135,12 +138,21 @@
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script src="https://cdn.socket.io/4.2.0/socket.io.min.js" integrity="sha384-PiBR5S00EtOj2Lto9Uu81cmoyZqR57XcOna1oAuVuIEjzj0wpqDVfD0JA9eXlRsj" crossorigin="anonymous"></script>
     <script>
-        $(document).ready(function(){
-            
-                let socket = io('https://logis-tech.herokuapp.com/');
+        let screenHeight = $(window).height();
+        let screenWidth = $(window).width()
 
+        console.log(screenHeight, screenWidth)
+
+
+        $(window).on('load', function(){
+            //pass
+        });
+
+        $(document).ready(function(){
+
+                let socket = io();
                 socket.on('connect', function() {
-                    console.log('connected!!!')
+                    console.log('Socket Connected!!')
                     socket.emit('message', 'Im connected!');
 
                 });
@@ -148,17 +160,12 @@
                 socket.on('test echo', (msg) => {
                     console.log('msg', msg)
                 });
-            
-                socket.on('bar found', (msg) => {
-                    console.log('BAR FOUND', msg)
-                });
                 
                 let video = document.querySelector("#videoElement");
                 let canvas = document.querySelector("#canvasElement");
                 let ctx = canvas.getContext('2d');
                 let localMediaStream = null;
                 
-
                 function sendSnapshot() {
                     if (!localMediaStream) {
                     return;
@@ -184,6 +191,8 @@
 
                     $('#scanOnClick').removeClass('d-none')
                     $('#scanBtnContainer').addClass('d-none')
+                    $('#menuBtn').addClass('d-none')
+                    $('body').css('background-color', 'black')
 
                     navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
                         video.srcObject = stream;
@@ -191,19 +200,50 @@
             
                         setInterval(function () {
                             sendSnapshot();
-                            }, 200);
+                            }, 150);
                         
                     }).catch(function(error) {
                         console.log(error);
                         });
                 })
 
-                socket.on('disconnect', function() {
+                socket.on('disconnect', () => {
 
-                    console.log('Disconnected!');
+                    console.log('Socket Disconnected!!');
                     localMediaStream = null;
+                    const mediaStream = video.srcObject;
+                    mediaStream.getTracks()[0].stop()
+                });
+
+                socket.on('results', (data) => {
+
+                    if(data.length > 0){
+                        
+                        $.ajax({
+                            url:"/result",
+                            type: "POST",
+                            data: JSON.stringify({data:data }),
+                            contentType: "application/json; charset=utf-8",
+                            success: function(data){
+                                window.location = '/result'
+                            }
+                        })
+                    }
 
                 })
+
+                $('#scanExit').on('click', () => {
+
+                    socket.disconnect()
+                    console.log('Socket Disconnected!');
+
+                    $('#scanOnClick').addClass('d-none')
+                    $('#scanBtnContainer').removeClass('d-none')
+                    $('#menuBtn').removeClass('d-none')
+                    $('body').css('background-color', '#f1eef3')
+                })
+
+
         })
 
     </script>
