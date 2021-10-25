@@ -8,27 +8,23 @@ from PIL import Image
 from io import BytesIO
 import base64
 import sys
+import json
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 Bootstrap(app)
 socketio = SocketIO(app)
 
-@app.route('/', methods=['GET', 'POST'])
-def vid():
-    return render_template("scanner.html",
-                        )
+output = []
 
 @socketio.on('connect')
 def connect():
+    output = []
     print("client connected")
-    sys.stdout.flush()
 
 @socketio.on('message')
 def message(msg):
-    emit('test echo', '\n\n SERVER TO CLIENT')
-#     print("Incoming Message: ", msg)
-#     sys.stdout.flush()
+    emit('test echo', '\n\nSERVER TO CLIENT')
 
 @socketio.on('process')
 def test_connect(data):
@@ -38,13 +34,39 @@ def test_connect(data):
     emit('test echo', '\n\nProcessing')
     
     decode_frame = decode(img)
-#     emit('bar found', decode_frame )
     
     if len(decode_frame) > 0:
         # print(decode_frame)
-        emit('bar found', decode_frame[0][0].decode('utf-8') )
+        emit('results', decode_frame[0][0].decode("utf-8") )
         disconnect(request.sid)
+        
 
+@app.route('/', methods=['GET', 'POST'])
+def home():
+    output.clear()
+    return render_template("scanner.html"
+                        )
 
+@app.route('/result', methods=['GET', 'POST'])
+def result():
+    
+    data = request.get_json()
+    
+    if data!=None:
+        output.append(data['data'])
+        
+    print("FOUND", data)
+    
+    with open("static/DB_proxy.json", 'r') as file:
+        db_proxy = json.load(file)
+             
+    return render_template("result.html",
+                    key=output[0],
+                    data=db_proxy
+                )
+    
+    
 if __name__ == '__main__':
-    socketio.run()
+    socketio.run(app)
+    
+
