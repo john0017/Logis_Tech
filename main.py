@@ -72,6 +72,21 @@ def products():
                         )
 
 
+@app.route('/addNew', methods=['GET', 'POST'])
+def addNew():
+    data = request.get_json()
+    with open("static/DB_proxy.json", 'r') as file:
+        db_proxy = json.load(file)
+    
+    db_proxy[data['key']]={}
+    key = data['key']
+    data.pop('key', None)
+    db_proxy[key].update(data)
+    
+    with open("static/DB_proxy.json", 'w') as file:
+        json.dump(db_proxy, file, indent=4)
+        
+    return 'done!'
 
     
 if __name__ == '__main__':
