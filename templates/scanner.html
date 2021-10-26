@@ -202,13 +202,13 @@
                         setInterval(function () {
                             sendSnapshot();
                             }, 150);
-                        
+
                     }).catch(function(error) {
                         console.log(error);
                         });
                 })
 
-                
+
                 socket.on('results', (data) => {
 
                     if(data.length > 0){
@@ -226,7 +226,7 @@
 
                 })
 
-               $('#scanExit').on('click', () => {
+                $('#scanExit').on('click', () => {
 
                     window.location = '/'
                     //socket.disconnect()
@@ -236,7 +236,6 @@
                     $('#menuBtn').removeClass('d-none')
                     $('body').css('background-color', '#f1eef3')
                 })
-
 
 
         })
