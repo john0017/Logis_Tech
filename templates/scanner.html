@@ -208,14 +208,7 @@
                         });
                 })
 
-                socket.on('disconnect', () => {
-
-                    console.log('Socket Disconnected!!');
-                    localMediaStream = null;
-                    const mediaStream = video.srcObject;
-                    mediaStream.getTracks()[0].stop()
-                });
-
+                
                 socket.on('results', (data) => {
 
                     if(data.length > 0){
@@ -233,16 +226,17 @@
 
                 })
 
-                $('#scanExit').on('click', () => {
+               $('#scanExit').on('click', () => {
 
-                    socket.disconnect()
-                    console.log('Socket Disconnected!');
+                    window.location = '/'
+                    //socket.disconnect()
 
                     $('#scanOnClick').addClass('d-none')
                     $('#scanBtnContainer').removeClass('d-none')
                     $('#menuBtn').removeClass('d-none')
                     $('body').css('background-color', '#f1eef3')
                 })
+
 
 
         })
