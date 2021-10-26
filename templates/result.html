@@ -47,6 +47,24 @@
         box-shadow: 4px 4px 4px #73568f65;
         border-color: #73568fd0;
     }
+    .section-addNew{
+        border-radius: 15px;
+        box-shadow: 4px 4px 4px #73568f65;
+        border-color: #73568fd0;
+    }
+    .input-label{
+        background-color: #73568fd0;
+        color: #f1eef3;
+        font-weight: bold;
+        border-top-left-radius: 15px !important;
+        border-bottom-left-radius: 15px !important;
+        width: 17vw;
+    }
+    .input-input{
+        font-weight: bold;
+        border-top-right-radius: 15px !important;
+        border-bottom-right-radius: 15px !important;
+    }
 </style>
 </head>
 <body>
@@ -132,11 +150,49 @@
                 <span>product not found</span>
                 <hr class="dropdown-divider">
             </div>
+            <!-- scanned key -->
+            <div class="row p-2 section-1">
+                <div class="col">
+                    Barcode No.
+                </div>
+                <div class="col">
+                    {{ key }}
+                </div>
+            </div>
+
+            <!-- hidden add details section -->
+            <div id="addNewDetails" class="row p-2 section-addNew mt-3 d-none">
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text input-label">name</span>
+                    <input id="newName" type="text" class="form-control input-input" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text input-label" >brand</span>
+                    <input id="newBrand" type="text" class="form-control input-input" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                  </div>
+                  <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text input-label" >Qty</span>
+                    <input id="newQty" type="text" class="form-control input-input" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                  </div>
+                  <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text input-label" >price</span>
+                    <input id="newPrice" type="text" class="form-control input-input" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                  </div>
+            </div>
+
             <div class="row p-2 mt-3">
                 <div class="col">
-                    <div class="rounded-pill shadow-sm text-center border addBtn">
-                        add to catalogue
+                    <div id="addBtn" class="rounded-pill shadow-sm text-center border addBtn">
+                        <i class="fas fa-plus"></i> add to catalogue
                     </div>
+                    <!-- hidden confirm btn -->
+                    <div id="addConfirm" class="rounded-pill shadow-sm text-center border addBtn d-none">
+                         confirm
+                    </div>
+                    <!-- hidden confirmation -->
+                    <div id="submitted" class=" text-center border d-none">
+                        Product Added!
+                   </div>
                 </div>
             </div>
         {% endif %}
@@ -149,6 +205,37 @@
         let screenWidth = $(window).width()
 
         console.log(screenHeight, screenWidth)
+        
+        //add to catalogue
+        $('#addBtn').on('click', ()=> {
+
+            $('#addBtn').addClass('d-none')
+            $('#addConfirm').removeClass('d-none')
+            $('#addNewDetails').removeClass('d-none')
+
+        })
+        $('#addConfirm').on('click', ()=> {
+            let key = "{{ key }}";
+            let newName = $('#newName').val()
+            let newBrand = $('#newBrand').val()
+            let newQty = $('#newQty').val()
+            let newPrice = $('#newPrice').val()
+
+            $.ajax({
+                type:'POST',
+                url:'/addNew',
+                contentType:'application/json; charset=utf-8',
+                data:JSON.stringify({key:key, newName:newName, newBrand:newBrand, newQty:newQty, newPrice:newPrice}),
+                success: function(data){
+                    console.log(data)
+
+                    $('#addConfirm').addClass('d-none')
+                    $('#submitted').removeClass('d-none')
+
+                    setTimeout(()=> window.location = '/', 2000)
+                }
+            })
+        })
     </script>
 </body>
 </html>                            
