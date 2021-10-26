@@ -65,6 +65,14 @@ def result():
                     data=db_proxy
                 )
     
+@app.route('/products', methods=['GET', 'POST'])
+def products():
+  
+    return render_template("products.html"
+                        )
+
+
+
     
 if __name__ == '__main__':
     socketio.run(app)
