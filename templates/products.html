@@ -47,6 +47,28 @@
         box-shadow: 4px 4px 4px #73568f65;
         border-color: #73568fd0;
     }
+    .product-cont{
+        border-radius: 25px;
+        box-shadow: 4px 4px 4px #73568f65;
+        border-color: #73568fd0;
+        background-color:#73568fc0;
+        font-weight: bold;
+        color: white;
+    }
+    .product-img{
+        border-top-left-radius: 15px !important;
+        border-top-right-radius: 15px !important;
+    }
+    .product-details{
+        border-bottom-left-radius: 15px !important;
+        border-bottom-right-radius: 15px !important;
+    }
+    .product-details_list{
+        list-style-type: none;
+    }
+    .detail-list-item{
+        display: block;
+    }
 </style>
 </head>
 <body>
@@ -77,136 +99,77 @@
 
     <!-- main content -->
     <div class="container p-3" style="text-transform: capitalize;">
-        
-       <div class="headers m-2">all products</div>
 
-        <div class="p-2 border" style="max-height: 650px; overflow-y:scroll">
-            
-            <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="headers m-2">all products</div>
 
-                <div class="col">
-                  <div class="card shadow-sm">
-                    <img src="{{ url_for('static', filename='product-placeholder-wp.jpeg') }}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">hand gel</h5>
-                        <div class="row">
-                            <div class="col">
-                                barcode
-                            </div>
-                            <div class="col">
-                                454656546765
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                brand
-                            </div>
-                            <div class="col">
-                                myprotien
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                quantity available
-                            </div>
-                            <div class="col">
-                                58
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                price/ unit
-                            </div>
-                            <div class="col">
-                                €40
-                            </div>
-                        </div>
+        <div class="p-2" style="max-height: 650px; overflow-y:scroll">
+            <div class="row">
+                <div class="col m-2  product-cont p-2">
+                    <div class="product-img mb-1">
+                        <img src="{{ url_for('static', filename='product-placeholder-wp.jpeg') }}" class="card-img-top product-img" alt="...">
                     </div>
-                  </div>
+                    <div class="product-details mt-1 p-2">
+                        <span class="detail-list-item">56464565464</span>
+                        <span class="detail-list-item">Hand Gel</span>
+                        <span class="detail-list-item">34 available</span>
+                        <span class="detail-list-item">€12/ unit</span>
+                    </div>
                 </div>
-
-                <div class="col">
-                    <div class="card">
-                      <img src="{{ url_for('static', filename='product-placeholder-wp.jpeg') }}" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">hand gel</h5>
-                          <div class="row">
-                              <div class="col">
-                                  barcode
-                              </div>
-                              <div class="col">
-                                  454656546765
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col">
-                                  brand
-                              </div>
-                              <div class="col">
-                                  myprotien
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col">
-                                  quantity available
-                              </div>
-                              <div class="col">
-                                  58
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col">
-                                  price/ unit
-                              </div>
-                              <div class="col">
-                                  €40
-                              </div>
-                          </div>
-                      </div>
+                <div class="col m-2  product-cont p-2">
+                    <div class="product-img border mb-1">
+                        <img src="{{ url_for('static', filename='product-placeholder-wp.jpeg') }}" class="card-img-top product-img" alt="...">
                     </div>
-                  </div>
-
-                  <div class="col">
-                    <div class="card">
-                      <img src="{{ url_for('static', filename='product-placeholder-wp.jpeg') }}" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">hand gel</h5>
-                          <div class="row">
-                              <div class="col">
-                                  barcode
-                              </div>
-                              <div class="col">
-                                  454656546765
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col">
-                                  brand
-                              </div>
-                              <div class="col">
-                                  myprotien
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col">
-                                  quantity available
-                              </div>
-                              <div class="col">
-                                  58
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col">
-                                  price/ unit
-                              </div>
-                              <div class="col">
-                                  €40
-                              </div>
-                          </div>
-                      </div>
+                    <div class="product-details mt-1 p-2">
+                        <span class="detail-list-item">56464565464</span>
+                        <span class="detail-list-item">Hand Gel</span>
+                        <span class="detail-list-item">34 available</span>
+                        <span class="detail-list-item">€12/ unit</span>
                     </div>
-                  </div>
-    
+                </div>
+                <div class="col m-2  product-cont p-2">
+                    <div class="product-img border mb-1">
+                        <img src="{{ url_for('static', filename='product-placeholder-wp.jpeg') }}" class="card-img-top product-img" alt="...">
+                    </div>
+                    <div class="product-details mt-1 p-2">
+                        <span class="detail-list-item">56464565464</span>
+                        <span class="detail-list-item">Hand Gel</span>
+                        <span class="detail-list-item">34 available</span>
+                        <span class="detail-list-item">€12/ unit</span>
+                    </div>
+                </div>
+                <div class="col m-2  product-cont p-2">
+                    <div class="product-img border mb-1">
+                        <img src="{{ url_for('static', filename='product-placeholder-wp.jpeg') }}" class="card-img-top product-img" alt="...">
+                    </div>
+                    <div class="product-details mt-1 p-2">
+                        <span class="detail-list-item">56464565464</span>
+                        <span class="detail-list-item">Hand Gel</span>
+                        <span class="detail-list-item">34 available</span>
+                        <span class="detail-list-item">€12/ unit</span>
+                    </div>
+                </div>
+                <div class="col m-2  product-cont p-2">
+                    <div class="product-img border mb-1">
+                        <img src="{{ url_for('static', filename='product-placeholder-wp.jpeg') }}" class="card-img-top product-img" alt="...">
+                    </div>
+                    <div class="product-details mt-1 p-2">
+                        <span class="detail-list-item">56464565464</span>
+                        <span class="detail-list-item">Hand Gel</span>
+                        <span class="detail-list-item">34 available</span>
+                        <span class="detail-list-item">€12/ unit</span>
+                    </div>
+                </div>
+                <div class="col m-2  product-cont p-2">
+                    <div class="product-img border mb-1">
+                        <img src="{{ url_for('static', filename='product-placeholder-wp.jpeg') }}" class="card-img-top product-img" alt="...">
+                    </div>
+                    <div class="product-details mt-1 p-2">
+                        <span class="detail-list-item">56464565464</span>
+                        <span class="detail-list-item">Hand Gel</span>
+                        <span class="detail-list-item">34 available</span>
+                        <span class="detail-list-item">€12/ unit</span>
+                    </div>
+                </div>
             </div>
         </div>
         
